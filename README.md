@@ -1,1 +1,1 @@
-# Terraform Settings for jeandeau.fr
+# Terraform Settings for `jeandeau.fr`
