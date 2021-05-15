@@ -40,6 +40,14 @@ resource "cloudflare_record" "www" {
   proxied = true
 }
 
+resource "cloudflare_record" "mx" {
+  zone_id = cloudflare_zone.main.id
+  name    = "jeandeau.fr"
+  value   = "mail.jeandeau.fr"
+  type    = "MX"
+  proxied = false
+}
+
 resource "cloudflare_record" "google_site_verification" {
   zone_id = cloudflare_zone.main.id
   name    = "jeandeau.fr"
