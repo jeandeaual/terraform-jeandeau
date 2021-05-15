@@ -4,12 +4,16 @@ on:
     branches:
       - master
     paths:
+      - '**.hcl'
       - '**.tf'
+      - '.github/workflows/terraform.yml'
   pull_request:
     branches:
       - master
     paths:
+      - '**.hcl'
       - '**.tf'
+      - '.github/workflows/terraform.yml'
   workflow_dispatch:
     inputs: {}
 jobs:
