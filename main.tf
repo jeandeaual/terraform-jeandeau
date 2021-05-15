@@ -49,7 +49,7 @@ resource "cloudflare_record" "google_site_verification" {
 }
 
 resource "cloudflare_page_rule" "opds2_url_forward" {
-  zone_id = cloudflare_zone.main.id
+  zone_id  = cloudflare_zone.main.id
   target   = "alexis.jeandeau.fr/partitions/opds2"
   priority = 3
 
@@ -62,7 +62,7 @@ resource "cloudflare_page_rule" "opds2_url_forward" {
 }
 
 resource "cloudflare_page_rule" "opds_url_forward" {
-  zone_id = cloudflare_zone.main.id
+  zone_id  = cloudflare_zone.main.id
   target   = "alexis.jeandeau.fr/partitions/opds"
   priority = 2
 
@@ -75,7 +75,7 @@ resource "cloudflare_page_rule" "opds_url_forward" {
 }
 
 resource "cloudflare_page_rule" "subdomain_url_forward" {
-  zone_id = cloudflare_zone.main.id
+  zone_id  = cloudflare_zone.main.id
   target   = "jeandeau.fr/*"
   priority = 1
 
