@@ -54,6 +54,8 @@ resource "cloudflare_page_rule" "opds2_url_forward" {
   priority = 3
 
   actions {
+    disable_zaraz = true
+
     forwarding_url {
       url         = "https://alexis.${cloudflare_zone.main.zone}/partitions/opds2/root.json"
       status_code = 301
@@ -67,6 +69,8 @@ resource "cloudflare_page_rule" "opds_url_forward" {
   priority = 2
 
   actions {
+    disable_zaraz = true
+
     forwarding_url {
       url         = "https://alexis.${cloudflare_zone.main.zone}/partitions/opds/root.xml"
       status_code = 301
@@ -80,6 +84,8 @@ resource "cloudflare_page_rule" "subdomain_url_forward" {
   priority = 1
 
   actions {
+    disable_zaraz = true
+
     forwarding_url {
       url         = "https://alexis.${cloudflare_zone.main.zone}/$1"
       status_code = 301
