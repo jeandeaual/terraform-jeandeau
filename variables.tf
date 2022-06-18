@@ -1,6 +1,6 @@
 variable "cloudflare_email" {
   type        = string
-  description = "CloudFlare email"
+  description = "CloudFlare e-mail address"
 }
 
 variable "cloudflare_api_key" {
