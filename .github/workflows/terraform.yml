@@ -6,6 +6,7 @@ on:
     paths:
       - '**.hcl'
       - '**.tf'
+      - '.terraform-version'
       - '.github/workflows/terraform.yml'
   pull_request:
     branches:
@@ -13,6 +14,7 @@ on:
     paths:
       - '**.hcl'
       - '**.tf'
+      - '.terraform-version'
       - '.github/workflows/terraform.yml'
   workflow_dispatch:
     inputs: {}
@@ -22,11 +24,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: actions/checkout@v3
+      - name: Read the Terraform version
+        id: terraform-version
+        uses: juliangruber/read-file-action@v1
         with:
-          terraform_version: 0.15.3
+          path: .terraform-version
+          trim: true
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ steps.terraform-version.outputs.content }}
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       - name: Terraform Format
         id: fmt
@@ -39,7 +47,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color
         continue-on-error: true
-      - uses: actions/github-script@0.9.0
+      - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
